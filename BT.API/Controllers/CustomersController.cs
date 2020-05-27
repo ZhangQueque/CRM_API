@@ -325,7 +325,7 @@ namespace BT.API.Controllers
             catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
 
             return Ok( );
@@ -333,7 +333,7 @@ namespace BT.API.Controllers
 
 
         /// <summary>
-        /// 根据员工返回对应的潜在客户列表
+        /// 根据员工返回对应的客户列表
         /// </summary>
         /// <param name="name">查询客户的名称</param>
         /// <returns></returns>
@@ -345,12 +345,12 @@ namespace BT.API.Controllers
             IQueryable<Customers> list =  context.Customers;
             if (!string.IsNullOrEmpty(name))
             {
-                list =  list.Where(m=>m.Name.Contains(name) && m.IsReal== 0 && m.EmployeesID == id).OrderByDescending(m => m.CreateTime).Take(20);
+                list =  list.Where(m=>m.Name.Contains(name) && m.IsDel== 0 && m.EmployeesID == id).OrderByDescending(m => m.CreateTime).Take(20);
 
                 return await list.ToListAsync();
             }
 
-            list =   list.Where(m => m.IsReal == 0 && m.EmployeesID == id).OrderByDescending(m => m.CreateTime).Take(20);
+            list =   list.Where(m => m.IsDel == 0 && m.EmployeesID == id).OrderByDescending(m => m.CreateTime).Take(20);
             return await list.ToListAsync();
 
         }

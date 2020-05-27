@@ -13,7 +13,7 @@ namespace BT.Dto
 
         public int CreateID { get; set; }
 
-        public DateTime CreateTime { get; set; }
+        public string CreateTime { get; set; }
 
 
 
