@@ -83,7 +83,7 @@
         </member>
         <member name="M:BT.API.Controllers.CustomersController.GetNoRealCustomersByEmployeeIDAsync(System.String)">
             <summary>
-            根据员工返回对应的潜在客户列表
+            根据员工返回对应的客户列表
             </summary>
             <param name="name">查询客户的名称</param>
             <returns></returns>
@@ -106,46 +106,18 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:BT.API.Controllers.EmployeesController.GetEmployeesAsync">
+        <member name="M:BT.API.Controllers.Employees_RolesController.GetRoles">
             <summary>
-            获取员工列表
+            角色下拉框
             </summary>
             <returns></returns>
         </member>
-        <member name="M:BT.API.Controllers.EmployeesController.GetPageListByEmployee(BT.Core.Pages.PageParameters)">
+        <member name="M:BT.API.Controllers.Employees_RolesController.GetPageListByEmployee_Roles(BT.Core.Pages.PageParameters,System.String)">
             <summary>
-            员工分页查询
+            角色分页查询
             </summary>
-            <param name="pageParameters">分页参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:BT.API.Controllers.EmployeesController.DeleteEmployeeAsync(System.String)">
-            <summary>
-            员工删除
-            </summary>
-            <param name="ids">主键集合</param>
-            <returns></returns>
-        </member>
-        <member name="M:BT.API.Controllers.EmployeesController.CreateEmployee(BT.Dto.EmployeeCreateDto)">
-            <summary>
-            添加一个员工
-            </summary>
-            <param name="createDto">表单数据</param>
-            <returns></returns>
-        </member>
-        <member name="M:BT.API.Controllers.EmployeesController.GetEmployeeByIdAsync(System.Int32)">
-            <summary>
-            根据id获取员工
-            </summary>
-            <param name="id">主键</param>
-            <returns></returns>
-        </member>
-        <member name="M:BT.API.Controllers.EmployeesController.EditCustomersAsync(System.String,BT.Dto.EmployeeCreateDto)">
-            <summary>
-            员工修改
-            </summary>
-            <param name="id">主键</param>
-            <param name="editDto">修改对象</param>
+            <param name="pageParameters"></param>
+            <param name="employee_RoleIDByFind"></param>
             <returns></returns>
         </member>
         <member name="M:BT.API.Controllers.OrdersController.CreateOrderAsync(BT.Dto.Orders_ProductsCreateDto)">
@@ -170,6 +142,41 @@
             <param name="permissionIDs">权限ID字符串</param>
             <returns></returns>
         </member>
+        <member name="M:BT.API.Controllers.PermissionsController.CreatePermissionAsync(BT.Dto.PermissionCreateDto)">
+            <summary>
+            新增权限
+            </summary>
+            <param name="permissionCreateDto">新增对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:BT.API.Controllers.PermissionsController.DeletePermissionAsync(System.String)">
+            <summary>
+            更爱权限状态
+            </summary>
+            <param name="permissionIDs">权限主键集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:BT.API.Controllers.PermissionsController.GetPermissionByIDAsync(System.Int32)">
+            <summary>
+            根据主键获取对应的权限信息
+            </summary>
+            <param name="permissionID">权限主键</param>
+            <returns></returns>
+        </member>
+        <member name="M:BT.API.Controllers.PermissionsController.EditPermissionByIDAsync(System.Int32,BT.Dto.PermissionCreateDto)">
+            <summary>
+            修改权限
+            </summary>
+            <param name="permissionID">主键</param>
+            <param name="permissionCreateDto">修改内容</param>
+            <returns></returns>
+        </member>
+        <member name="M:BT.API.Controllers.PermissionsController.GetPermissionsDtoesByDelete(BT.Core.Pages.PageParameters)">
+            <summary>
+            获取已删除的权限列表
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:BT.API.Controllers.ProductsController.GetProductsAsync">
             <summary>
             获取所有商品
@@ -180,6 +187,41 @@
             <summary>
             角色下拉框
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BT.API.Controllers.RolesController.GetRolesAllAsync(BT.Core.Pages.PageParameters)">
+            <summary>
+            角色显示
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BT.API.Controllers.RolesController.AddRoleAsync(BT.Dto.RoleCreateDto)">
+            <summary>
+            添加角色
+            </summary>
+            <param name="roleDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BT.API.Controllers.RolesController.DelRoleAsync(System.String)">
+            <summary>
+            删除角色
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BT.API.Controllers.RolesController.GetRoleByIdAsync(System.Int32)">
+            <summary>
+            根据Id获取角色
+            </summary>
+            <param name="roleId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BT.API.Controllers.RolesController.EditRoleAsync(System.Int32,BT.Dto.RoleCreateDto)">
+            <summary>
+            修改角色
+            </summary>
+            <param name="id"></param>
+            <param name="editRoleDto"></param>
             <returns></returns>
         </member>
     </members>

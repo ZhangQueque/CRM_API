@@ -25,7 +25,12 @@ namespace BT.API.AutoMap
                 //Customers的时间（datetime）
                 , config =>config.MapFrom(m=>m.CreateTime.ToLongDateString()+ m.CreateTime.ToLongTimeString()));
 
-            
+            CreateMap<Roles, RolesShowDto>()
+               .ForMember(m => m.CreateTime  //CustomerShowDto的时间（字符串）
+
+               //Customers的时间（datetime）
+               , config => config.MapFrom(m => m.CreateTime.ToLongDateString() + m.CreateTime.ToLongTimeString()));
+
             CreateMap<Customers, Customers>();
             CreateMap<OrderCreateDto, Orders>();
             
@@ -35,13 +40,17 @@ namespace BT.API.AutoMap
 
 
             CreateMap<PermissionsDto, PermissionsDto>();
-            CreateMap<Employees, EmployeeShowDto>()
-               .ForMember(m => m.CreateTime  //CustomerShowDto的时间（字符串）
 
-               //Customers的时间（datetime）
-               , config => config.MapFrom(m => m.CreateTime.ToLongDateString() + m.CreateTime.ToLongTimeString()));
+            CreateMap<Roles, RolesShowDto>();
+            CreateMap<RoleCreateDto, Roles>();
+            CreateMap<PermissionCreateDto, Permissions>();
+            CreateMap<PermissionsDto, PermissionsDto>();
 
-            CreateMap<EmployeeCreateDto, Employees>();
+            CreateMap<Employees_Roles, Employees_RolesShowDto>()
+                .ForMember(m => m.CreateTime  //CustomerShowDto的时间（字符串）
+                 
+                //Customers的时间（datetime）
+                , config => config.MapFrom(m => m.CreateTime.ToLongDateString() + m.CreateTime.ToLongTimeString()));
         }
     }
 }

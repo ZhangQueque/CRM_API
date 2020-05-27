@@ -65,11 +65,15 @@ namespace BT.API.Controllers
             {
                 return NotFound();
             }
-            customer.IsReal = 1;
+            if (customer.IsReal==0)
+            {
+                customer.IsReal = 1;
 
-              context.Customers.Update(customer);
+                context.Customers.Update(customer);
 
-            await context.SaveChangesAsync();
+                await context.SaveChangesAsync();
+            }
+           
 
             //新增订单产品记录
 

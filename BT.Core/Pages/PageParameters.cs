@@ -58,6 +58,9 @@ namespace BT.Core.Pages
         public DateTime? StartTimeByFind { get; set; }    
         public DateTime? EndTimeByFind { get; set; }
 
+        public int RoleIDByFind { get; set; } = 0;
+        public string RoleName { get; set; } = "";
+        public DateTime? CreateTimeByFind { get; set; }
 
         public int Status { get; set; } = 0;
 
