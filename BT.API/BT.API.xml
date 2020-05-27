@@ -83,7 +83,7 @@
         </member>
         <member name="M:BT.API.Controllers.CustomersController.GetNoRealCustomersByEmployeeIDAsync(System.String)">
             <summary>
-            根据员工返回对应的潜在客户列表
+            根据员工返回对应的客户列表
             </summary>
             <param name="name">查询客户的名称</param>
             <returns></returns>
@@ -126,6 +126,41 @@
             </summary>
             <param name="roleID">角色ID</param>
             <param name="permissionIDs">权限ID字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:BT.API.Controllers.PermissionsController.CreatePermissionAsync(BT.Dto.PermissionCreateDto)">
+            <summary>
+            新增权限
+            </summary>
+            <param name="permissionCreateDto">新增对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:BT.API.Controllers.PermissionsController.DeletePermissionAsync(System.String)">
+            <summary>
+            更爱权限状态
+            </summary>
+            <param name="permissionIDs">权限主键集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:BT.API.Controllers.PermissionsController.GetPermissionByIDAsync(System.Int32)">
+            <summary>
+            根据主键获取对应的权限信息
+            </summary>
+            <param name="permissionID">权限主键</param>
+            <returns></returns>
+        </member>
+        <member name="M:BT.API.Controllers.PermissionsController.EditPermissionByIDAsync(System.Int32,BT.Dto.PermissionCreateDto)">
+            <summary>
+            修改权限
+            </summary>
+            <param name="permissionID">主键</param>
+            <param name="permissionCreateDto">修改内容</param>
+            <returns></returns>
+        </member>
+        <member name="M:BT.API.Controllers.PermissionsController.GetPermissionsDtoesByDelete(BT.Core.Pages.PageParameters)">
+            <summary>
+            获取已删除的权限列表
+            </summary>
             <returns></returns>
         </member>
         <member name="M:BT.API.Controllers.ProductsController.GetProductsAsync">
