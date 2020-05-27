@@ -158,11 +158,26 @@ namespace BT.API.Controllers
         {
 
             var id = Convert.ToInt32(User.Identity.Name);
-
+            int sortId;   var leaveObj = new Permissions() ;
             //获取排序id
-            int sortId = await context.Permissions.Where(m => m.PID == permissionCreateDto.PID).MaxAsync(m => m.Sort);
+            try
+            {
+                var  sortList =await context.Permissions.Where(m => m.PID == permissionCreateDto.PID).ToListAsync();
+                if (sortList.Count!=0)
+                {
+                    sortId = sortList.Max(m => m.Sort);
+                }
+                else
+                {
+                    sortId = 1;
+                }
+                leaveObj = await context.Permissions.FirstOrDefaultAsync(m => m.PID == permissionCreateDto.PID);
+            }
+            catch (Exception ex)
+            {
 
-            var leaveObj = await context.Permissions.FirstOrDefaultAsync(m => m.PID == permissionCreateDto.PID);
+                throw;
+            }
 
             var permission = mapper.Map<Permissions>(permissionCreateDto);
 
@@ -170,8 +185,15 @@ namespace BT.API.Controllers
             permission.CreateTime = DateTime.Now;
             permission.ActiveName = permission.Name;
             permission.Sort = sortId + 1;
-            permission.Leave = leaveObj.Leave;
+            if (leaveObj==null)
+            {
+                permission.Leave = 1;
+            }
+            else
+            {
+                permission.Leave = leaveObj.Leave;
 
+            }
             await context.Permissions.AddAsync(permission);
 
             await context.SaveChangesAsync();
