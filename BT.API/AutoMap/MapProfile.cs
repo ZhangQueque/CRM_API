@@ -51,6 +51,16 @@ namespace BT.API.AutoMap
                  
                 //Customers的时间（datetime）
                 , config => config.MapFrom(m => m.CreateTime.ToLongDateString() + m.CreateTime.ToLongTimeString()));
+
+
+            CreateMap<Employees, EmployeeShowDto>()
+              .ForMember(m => m.CreateTime  //CustomerShowDto的时间（字符串）
+
+              //Customers的时间（datetime）
+              , config => config.MapFrom(m => m.CreateTime.ToLongDateString() + m.CreateTime.ToLongTimeString()));
+
+            CreateMap<EmployeeCreateDto, Employees>();
+
         }
     }
 }
