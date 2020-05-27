@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 using BT.Dto;
 using System.IO;
 using BT.Core.Pages;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace BT.API.Controllers
 {
@@ -48,14 +49,14 @@ namespace BT.API.Controllers
             List<PermissionsDto> permissionsDtos;//权限集合 
 
             //拿取全部的权限
-            var permissions = await context.Permissions.Where(m=>m.IsDel==0).ToListAsync();
+            var permissions = await context.Permissions.Where(m => m.IsDel == 0).ToListAsync();
 
             //Auto映射
             permissionsDtos = mapper.Map<List<PermissionsDto>>(permissions);
 
 
-            if (roleID ==0)
-            {              
+            if (roleID == 0)
+            {
                 return Ok(new { code = 0, msg = "", count = permissionsDtos.Count(), data = permissionsDtos });
             }
 
@@ -93,11 +94,11 @@ namespace BT.API.Controllers
         /// <param name="permissionIDs">权限ID字符串</param>
         /// <returns></returns>
         [HttpGet("edit/{roleID}")]
-        public async Task<IActionResult> EditPermissionsDtoesByRoleIDAsync(int roleID,string permissionIDs)
+        public async Task<IActionResult> EditPermissionsDtoesByRoleIDAsync(int roleID, string permissionIDs)
         {
-            if (roleID==0)
+            if (roleID == 0)
             {
-                return Ok(new { code=1,msg="请先选中角色，再为其更改权限！"});
+                return Ok(new { code = 1, msg = "请先选中角色，再为其更改权限！" });
             }
 
             var tokenid = Convert.ToInt32(User.Identity.Name);
@@ -130,7 +131,7 @@ namespace BT.API.Controllers
                 roles_Permission.PermissionID = permission.ID;
                 roles_Permission.PermissionName = roles_Permission.PermissionName;
                 roles_PermissionsAddList.Add(roles_Permission);
-             }
+            }
 
 
             await context.Roles_Permissions.AddRangeAsync(roles_PermissionsAddList);
@@ -143,7 +144,7 @@ namespace BT.API.Controllers
             {
                 await distributedCache.RemoveAsync($"Role_Menu_{item.ID}");
             }
-            return Ok(new { code=0,msg="修改权限成功！"});
+            return Ok(new { code = 0, msg = "修改权限成功！" });
         }
 
 
@@ -153,7 +154,7 @@ namespace BT.API.Controllers
         /// <param name="permissionCreateDto">权限对象</param>
         /// <returns></returns>
         [HttpPost("add")]
-        public async Task<IActionResult> CreatePermissionAsync([FromBody]PermissionCreateDto permissionCreateDto)
+        public async Task<IActionResult> CreatePermissionAsync([FromBody] PermissionCreateDto permissionCreateDto)
         {
 
             var id = Convert.ToInt32(User.Identity.Name);
@@ -176,8 +177,38 @@ namespace BT.API.Controllers
             await context.SaveChangesAsync();
 
             return Ok();
-                 
+
         }
- 
+
+
+        /// <summary>
+        /// 删除权限
+        /// </summary>
+        /// <param name="permissionIDs">权限id集合</param>
+        /// <returns></returns>
+        [HttpDelete("del")]
+        public async Task<IActionResult> DeletePermissionAsync(string permissionIDs)
+        {
+            List<Permissions> permissions = new List<Permissions>();
+
+            foreach (var item in permissionIDs.Split(","))
+            {
+                var permission = await context.Permissions.FindAsync(Convert.ToInt32(item));
+                permission.IsDel =1;
+                permissions.Add(permission);
+            }
+
+            context.Permissions.UpdateRange(permissions);
+
+            await context.SaveChangesAsync();
+
+            //请掉所有角色权限菜单的缓冲
+            foreach (var item in await context.Roles.ToListAsync())
+            {
+                await distributedCache.RemoveAsync($"Role_Menu_{item.ID}");
+            }
+
+            return Ok(permissionIDs.Split(",").Length);
+        }
     }
 }
