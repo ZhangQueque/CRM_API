@@ -151,7 +151,7 @@ namespace BT.API.Controllers
         /// <summary>
         /// 新增权限
         /// </summary>
-        /// <param name="permissionCreateDto">权限对象</param>
+        /// <param name="permissionCreateDto">新增对象</param>
         /// <returns></returns>
         [HttpPost("add")]
         public async Task<IActionResult> CreatePermissionAsync([FromBody] PermissionCreateDto permissionCreateDto)
@@ -182,9 +182,9 @@ namespace BT.API.Controllers
 
 
         /// <summary>
-        /// 删除权限
+        /// 更爱权限状态
         /// </summary>
-        /// <param name="permissionIDs">权限id集合</param>
+        /// <param name="permissionIDs">权限主键集合</param>
         /// <returns></returns>
         [HttpDelete("del")]
         public async Task<IActionResult> DeletePermissionAsync(string permissionIDs)
@@ -194,7 +194,7 @@ namespace BT.API.Controllers
             foreach (var item in permissionIDs.Split(","))
             {
                 var permission = await context.Permissions.FindAsync(Convert.ToInt32(item));
-                permission.IsDel =1;
+                permission.IsDel = permission.IsDel==0?1:0;
                 permissions.Add(permission);
             }
 
@@ -210,5 +210,100 @@ namespace BT.API.Controllers
 
             return Ok(permissionIDs.Split(",").Length);
         }
+
+
+
+        /// <summary>
+        /// 根据主键获取对应的权限信息
+        /// </summary>
+        /// <param name="permissionID">权限主键</param>
+        /// <returns></returns>
+        [HttpGet("detail/{permissionID}")]
+        public async Task<ActionResult<Permissions>> GetPermissionByIDAsync(int permissionID)
+        {
+            var per = await context.Permissions.FindAsync(permissionID);
+            if (per == null)
+            {
+                return NotFound();
+            }
+
+            return per;
+        }
+
+
+        /// <summary>
+        /// 修改权限
+        /// </summary>
+        /// <param name="permissionID">主键</param>
+        /// <param name="permissionCreateDto">修改内容</param>
+        /// <returns></returns>
+        [HttpPut("{permissionID}")]
+        public async Task<IActionResult> EditPermissionByIDAsync(int permissionID, [FromBody] PermissionCreateDto permissionCreateDto)
+        {
+            var per = await context.Permissions.FindAsync(permissionID);
+            if (per == null)
+            {
+                return NotFound();
+            }
+            per.Name = permissionCreateDto.Name;
+            per.Icon = permissionCreateDto.Icon;
+            per.Url = permissionCreateDto.Url;
+            per.ActiveName = permissionCreateDto.Name;
+
+            context.Permissions.Update(per);
+            await context.SaveChangesAsync();
+            //请掉所有角色权限菜单的缓冲
+            foreach (var item in await context.Roles.ToListAsync())
+            {
+                await distributedCache.RemoveAsync($"Role_Menu_{item.ID}");
+            }
+
+            return Ok();
+        }
+
+
+
+        /// <summary>
+        /// 获取已删除的权限列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("delList")]
+        public async Task<IActionResult> GetPermissionsDtoesByDelete([FromQuery]PageParameters pageParameters)
+        {
+            List<PermissionsDto> permissionsDtos;//权限集合 
+
+            //拿取全部的权限
+            var permissions =   context.Permissions.Where(m => m.IsDel == 1);
+
+            if (!string.IsNullOrEmpty(pageParameters.CustomerNameByFind))
+            {
+                permissions = permissions.Where(m => m.Name.Contains(pageParameters.CustomerNameByFind));
+            }
+            //时间判断
+            //开始时间
+            if (pageParameters.StartTimeByFind != null)
+            {
+                permissions = permissions.Where(m => m.CreateTime >= pageParameters.StartTimeByFind);
+            }
+
+
+            //结束时间
+            if (pageParameters.EndTimeByFind != null)
+            {
+                permissions = permissions.Where(m => m.CreateTime <= pageParameters.EndTimeByFind);
+            }
+
+            //中间时间
+            if (pageParameters.StartTimeByFind != null && pageParameters.EndTimeByFind != null)
+            {
+                permissions = permissions.Where(m => m.CreateTime >= pageParameters.StartTimeByFind && m.CreateTime <= pageParameters.EndTimeByFind);
+            }
+
+            //Auto映射
+            permissionsDtos = mapper.Map<List<PermissionsDto>>(await permissions.ToListAsync());
+
+            return Ok(new { code = 0, msg = "", count = permissionsDtos.Count, data = permissionsDtos });
+        }
+
     }
 }

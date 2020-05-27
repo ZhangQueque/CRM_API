@@ -31,7 +31,7 @@ namespace BT.API.AutoMap
             
             CreateMap<Products, Orders_Products>();
 
-            CreateMap<Permissions, PermissionsDto>();
+            CreateMap<Permissions, PermissionsDto>().ForMember(m=>m.CreateTime,config=>config.MapFrom(m=>m.CreateTime.ToLongDateString()+m.CreateTime.ToLongTimeString()));
 
 
             CreateMap<PermissionsDto, PermissionsDto>();
