@@ -106,6 +106,20 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:BT.API.Controllers.Employees_RolesController.GetRoles">
+            <summary>
+            角色下拉框
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BT.API.Controllers.Employees_RolesController.GetPageListByEmployee_Roles(BT.Core.Pages.PageParameters,System.String)">
+            <summary>
+            角色分页查询
+            </summary>
+            <param name="pageParameters"></param>
+            <param name="employee_RoleIDByFind"></param>
+            <returns></returns>
+        </member>
         <member name="M:BT.API.Controllers.OrdersController.CreateOrderAsync(BT.Dto.Orders_ProductsCreateDto)">
             <summary>
             新增订单
