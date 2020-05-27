@@ -146,5 +146,38 @@ namespace BT.API.Controllers
             return Ok(new { code=0,msg="修改权限成功！"});
         }
 
+
+        /// <summary>
+        /// 新增权限
+        /// </summary>
+        /// <param name="permissionCreateDto">权限对象</param>
+        /// <returns></returns>
+        [HttpPost("add")]
+        public async Task<IActionResult> CreatePermissionAsync([FromBody]PermissionCreateDto permissionCreateDto)
+        {
+
+            var id = Convert.ToInt32(User.Identity.Name);
+
+            //获取排序id
+            int sortId = await context.Permissions.Where(m => m.PID == permissionCreateDto.PID).MaxAsync(m => m.Sort);
+
+            var leaveObj = await context.Permissions.FirstOrDefaultAsync(m => m.PID == permissionCreateDto.PID);
+
+            var permission = mapper.Map<Permissions>(permissionCreateDto);
+
+            permission.CreateID = id;
+            permission.CreateTime = DateTime.Now;
+            permission.ActiveName = permission.Name;
+            permission.Sort = sortId + 1;
+            permission.Leave = leaveObj.Leave;
+
+            await context.Permissions.AddAsync(permission);
+
+            await context.SaveChangesAsync();
+
+            return Ok();
+                 
+        }
+ 
     }
 }

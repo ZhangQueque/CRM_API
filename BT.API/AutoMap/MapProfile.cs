@@ -36,6 +36,8 @@ namespace BT.API.AutoMap
 
             CreateMap<PermissionsDto, PermissionsDto>();
 
+            CreateMap<PermissionCreateDto, Permissions>();
+
         }
     }
 }
