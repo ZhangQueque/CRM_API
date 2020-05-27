@@ -325,7 +325,7 @@ namespace BT.API.Controllers
             catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
 
             return Ok( );
