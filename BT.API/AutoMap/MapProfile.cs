@@ -33,9 +33,13 @@ namespace BT.API.AutoMap
 
             CreateMap<Permissions, PermissionsDto>();
 
-
             CreateMap<PermissionsDto, PermissionsDto>();
 
+            CreateMap<Employees_Roles, Employees_RolesShowDto>()
+                .ForMember(m => m.CreateTime  //CustomerShowDto的时间（字符串）
+
+                //Customers的时间（datetime）
+                , config => config.MapFrom(m => m.CreateTime.ToLongDateString() + m.CreateTime.ToLongTimeString()));
         }
     }
 }
