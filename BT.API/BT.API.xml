@@ -106,6 +106,48 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:BT.API.Controllers.EmployeesController.GetEmployeesAsync">
+            <summary>
+            获取员工列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BT.API.Controllers.EmployeesController.GetPageListByEmployee(BT.Core.Pages.PageParameters)">
+            <summary>
+            员工分页查询
+            </summary>
+            <param name="pageParameters">分页参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:BT.API.Controllers.EmployeesController.DeleteEmployeeAsync(System.String)">
+            <summary>
+            员工删除
+            </summary>
+            <param name="ids">主键集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:BT.API.Controllers.EmployeesController.CreateEmployee(BT.Dto.EmployeeCreateDto)">
+            <summary>
+            添加一个员工
+            </summary>
+            <param name="createDto">表单数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:BT.API.Controllers.EmployeesController.GetEmployeeByIdAsync(System.Int32)">
+            <summary>
+            根据id获取员工
+            </summary>
+            <param name="id">主键</param>
+            <returns></returns>
+        </member>
+        <member name="M:BT.API.Controllers.EmployeesController.EditCustomersAsync(System.String,BT.Dto.EmployeeCreateDto)">
+            <summary>
+            员工修改
+            </summary>
+            <param name="id">主键</param>
+            <param name="editDto">修改对象</param>
+            <returns></returns>
+        </member>
         <member name="M:BT.API.Controllers.OrdersController.CreateOrderAsync(BT.Dto.Orders_ProductsCreateDto)">
             <summary>
             新增订单

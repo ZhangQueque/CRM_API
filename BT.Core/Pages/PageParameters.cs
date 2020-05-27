@@ -40,12 +40,20 @@ namespace BT.Core.Pages
             set { limit = value > 300 ? 300 : value; }
         }
 
-
+        //客户查询字段
         public int EmployeeIDByFind { get; set; } = 0;
 
         public int CustomerSegmentationIDByFind { get; set; } = 0;
 
         public string CustomerNameByFind { get; set; } = "";
+
+
+        //员工查询字段
+        //public int EmployeeRoleIDByFind { get; set; } = 0;
+
+        //public int EmployeeeSegmentationIDByFind { get; set; } = 0;
+
+        public string EmployeeNameByFind { get; set; } = "";
 
         public DateTime? StartTimeByFind { get; set; }    
         public DateTime? EndTimeByFind { get; set; }

@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace BT.Data.Entities
+namespace BT.Dto
 {
-
-    /// <summary>
-    /// 员工实体对象
-    /// </summary>
-    public class Employees: BaseEntity
+     public  class EmployeeShowDto
     {
-      
+        public int ID { get; set; }
+        public int IsDel { get; set; }
+
+        public int CreateID { get; set; }
+
+        public string CreateTime { get; set; }
+
         public string Name { get; set; }
 
         public string Email { get; set; }
@@ -35,10 +35,6 @@ namespace BT.Data.Entities
         /// 父类id
         /// </summary>
         public int EmployeePID { get; set; }
-        /// <summary>
-        /// 是否是父类
-        /// </summary>
-        public int IsParent { get; set; }
 
     }
 }
