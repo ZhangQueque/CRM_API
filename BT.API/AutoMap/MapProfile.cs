@@ -61,6 +61,9 @@ namespace BT.API.AutoMap
 
             CreateMap<EmployeeCreateDto, Employees>();
 
+
+            CreateMap<EmployeeExcelDto, Employees>();
+
         }
     }
 }

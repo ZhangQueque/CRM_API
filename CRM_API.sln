@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BT.API", "BT.API\BT.API.csproj", "{53605DEF-7E84-4A30-ACDA-BB22BEC90C06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BT.Data", "BT.Data\BT.Data.csproj", "{E354A92E-364E-48A8-8396-A556AF0FE8C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BT.Data", "BT.Data\BT.Data.csproj", "{E354A92E-364E-48A8-8396-A556AF0FE8C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BT.Service", "BT.Service\BT.Service.csproj", "{C4324DDF-6AB2-4CFA-9038-3F161F9B1754}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BT.Service", "BT.Service\BT.Service.csproj", "{C4324DDF-6AB2-4CFA-9038-3F161F9B1754}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BT.Core", "BT.Core\BT.Core.csproj", "{8F7EFC20-4D78-4356-8E6C-B66F92EE5591}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BT.Core", "BT.Core\BT.Core.csproj", "{8F7EFC20-4D78-4356-8E6C-B66F92EE5591}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BT.Dto", "BT.Dto\BT.Dto.csproj", "{FBB9DD3B-CEE1-43FD-B1F9-294A9BE40076}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BT.Dto", "BT.Dto\BT.Dto.csproj", "{FBB9DD3B-CEE1-43FD-B1F9-294A9BE40076}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BT.API", "BT.API\BT.API.csproj", "{698813D0-32B9-4F86-B9F7-B3D559469283}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{53605DEF-7E84-4A30-ACDA-BB22BEC90C06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{53605DEF-7E84-4A30-ACDA-BB22BEC90C06}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{53605DEF-7E84-4A30-ACDA-BB22BEC90C06}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{53605DEF-7E84-4A30-ACDA-BB22BEC90C06}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E354A92E-364E-48A8-8396-A556AF0FE8C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E354A92E-364E-48A8-8396-A556AF0FE8C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E354A92E-364E-48A8-8396-A556AF0FE8C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{FBB9DD3B-CEE1-43FD-B1F9-294A9BE40076}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBB9DD3B-CEE1-43FD-B1F9-294A9BE40076}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBB9DD3B-CEE1-43FD-B1F9-294A9BE40076}.Release|Any CPU.Build.0 = Release|Any CPU
+		{698813D0-32B9-4F86-B9F7-B3D559469283}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{698813D0-32B9-4F86-B9F7-B3D559469283}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{698813D0-32B9-4F86-B9F7-B3D559469283}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{698813D0-32B9-4F86-B9F7-B3D559469283}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
