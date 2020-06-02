@@ -36,5 +36,11 @@
     <Folder Include="wwwroot\CustomerImg\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="BT.API.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 
 </Project>
