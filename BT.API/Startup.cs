@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using BT.API.Models;
+ using BT.API.Models;
 using BT.Data;
 using BT.Service;
 using BT.Service.Employee;
@@ -96,7 +96,7 @@ namespace BT.API
 
             });
 
-        }
+         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -122,7 +122,7 @@ namespace BT.API
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+ 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
