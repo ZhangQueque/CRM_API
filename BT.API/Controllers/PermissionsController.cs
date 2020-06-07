@@ -208,7 +208,7 @@ namespace BT.API.Controllers
         /// </summary>
         /// <param name="permissionIDs">权限主键集合</param>
         /// <returns></returns>
-        [HttpDelete("del")]
+        [HttpGet("del")]
         public async Task<IActionResult> DeletePermissionAsync(string permissionIDs)
         {
             List<Permissions> permissions = new List<Permissions>();

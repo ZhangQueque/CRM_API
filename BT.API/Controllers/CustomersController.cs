@@ -215,7 +215,7 @@ namespace BT.API.Controllers
         /// </summary>
         /// <param name="ids">主键集合</param>
         /// <returns></returns>
-        [HttpDelete("delete")]
+        [HttpGet("delete")]
         public async Task<IActionResult> DeleteCustomersAsync(string ids)
         {
             List<Customers> customers = new List<Customers>();

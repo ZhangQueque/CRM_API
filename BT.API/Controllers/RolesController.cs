@@ -100,7 +100,7 @@ namespace BT.API.Controllers
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        [HttpDelete("delroles")]
+        [HttpGet("delroles")]
         public async Task<IActionResult> DelRoleAsync(string ids)
         {
             List<Roles> roles = new List<Roles>();
