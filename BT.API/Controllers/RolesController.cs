@@ -40,6 +40,7 @@ namespace BT.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<List<Roles>>> GetRolesAsync()
         {
             return await context.Roles.Where(m => m.IsDel == 0).ToListAsync();

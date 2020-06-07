@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 using BT.Dto;
 using System.IO;
 using BT.Core.Pages;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.DateTime;
 
 namespace BT.API.Controllers
 {
@@ -73,6 +74,60 @@ namespace BT.API.Controllers
             var employee_roleShowDto = mapper.Map<List<Employees_RolesShowDto>>(pagelist.Source);
             //返回符合Layui的数据格式
             return Ok(new { code = 0, msg = "", data = employee_roleShowDto, count = pagelist.Count });
+        }
+
+
+
+        /// <summary>
+        /// 添加角色分配
+        /// </summary>
+        /// <param name="employees_Roles">添加对象</param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> CreateMap(Employees_Roles employees_Roles)
+        {
+            var map = await context.Employees_Roles.FirstOrDefaultAsync(m => m.EmployeeID == employees_Roles.EmployeeID && m.RoleID == employees_Roles.RoleID);
+            if (map != null )
+            {
+                return Ok(new { code=1,msg="该用户角色已存在！请重新选择！"});
+
+            }
+            var emp = await context.Employees.FindAsync(employees_Roles.EmployeeID);
+
+            var role = await context.Roles.FindAsync(employees_Roles.RoleID);
+
+            employees_Roles.EmployeeName = emp.Name;
+            employees_Roles.RoleName = role.Name;
+            employees_Roles.CreateTime = DateTime.Now;
+
+            await context.Employees_Roles.AddAsync(employees_Roles);
+
+            await context.SaveChangesAsync();
+
+            return Ok(new { code = 0, msg = "角色分配成功！" });
+        }
+
+
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="ids">主键集合</param>
+        /// <returns></returns>
+        [HttpGet("delete")]
+        public async Task<IActionResult> DeleteMap(string ids)
+        {
+            List<Employees_Roles> employees_Roles = new List<Employees_Roles>();
+            foreach (var item in ids.Split(","))
+            {
+                var map = await context.Employees_Roles.FindAsync(Convert.ToInt32(item));
+                employees_Roles.Add(map);
+            }
+
+            context.Employees_Roles.RemoveRange(employees_Roles);
+            await context.SaveChangesAsync();
+
+            return Ok(ids.Split(",").Length);
         }
     }
 }
