@@ -76,6 +76,27 @@ namespace BT.API.Controllers
 
 
         /// <summary>
+        /// 聊天记录
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("chat")]
+        public async Task<ActionResult<List<ChatDto>>> GetChatHistoryAsync()
+        {
+            string json = await distributedCache.GetStringAsync("chat");
+            if (string.IsNullOrEmpty(json))
+            {
+                List<ChatDto> chatDtos = new List<ChatDto>();
+                
+                return chatDtos;
+            }
+            else
+            {
+                var list = JsonSerializer.Deserialize<List<ChatDto>>(json);
+                return list;
+            }
+        }
+
+        /// <summary>
         /// 获取公共数据
         /// </summary>
         /// <returns></returns>

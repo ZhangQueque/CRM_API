@@ -4,7 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
- using BT.API.Models;
+using BT.API.Hubs;
+using BT.API.Models;
 using BT.Data;
 using BT.Service;
 using BT.Service.Employee;
@@ -81,8 +82,8 @@ namespace BT.API
             services.Configure<CustomConfigOptions>(Configuration.GetSection("CustomConfigOptions"));
 
 
-            //注册一个跨域方案
-            services.AddCors(options=>options.AddPolicy("cors",options=>options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+            //注册一个跨域方案 https://www.zhangqueque.top:99
+            services.AddCors(options=>options.AddPolicy("cors",options=>options.WithOrigins("https://www.zhangqueque.top:99", "https://localhost:44347").WithOrigins("https://*.*.*.*").WithOrigins("http://*.*.*.*").WithMethods("GET","POST","DELETE", "PUT").AllowAnyHeader().AllowCredentials() ));
 
 
             //注册AutoMapper
@@ -91,11 +92,12 @@ namespace BT.API
 
             //注册redis分布式缓冲服务
             services.AddDistributedRedisCache(options=> {
-                options.Configuration = "129.211.14.185:6379";
+                options.Configuration = Configuration["Redis"];
                 options.InstanceName = "zhangqueque";    
 
             });
 
+            services.AddSignalR();
          }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -122,7 +124,11 @@ namespace BT.API
 
             app.UseAuthentication();
             app.UseAuthorization();
- 
+            app.UseEndpoints(options => {
+
+                options.MapHub<ChatHub>("/ChatHub")  ;
+            });
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

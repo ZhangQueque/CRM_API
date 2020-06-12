@@ -259,7 +259,7 @@ namespace BT.API.Controllers
         /// <param name="permissionID">主键</param>
         /// <param name="permissionCreateDto">修改内容</param>
         /// <returns></returns>
-        [HttpPut("{permissionID}")]
+        [HttpPost("editnew")]
         public async Task<IActionResult> EditPermissionByIDAsync(int permissionID, [FromBody] PermissionCreateDto permissionCreateDto)
         {
             var per = await context.Permissions.FindAsync(permissionID);
